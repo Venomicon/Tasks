@@ -32,7 +32,7 @@ public class SimpleEmailServiceTest {
     public void shouldSendEmail() {
         //Given
         Mail mail = new Mail("test@test.com", "test subject",
-                "test message", "test2@test.com");
+                "test message");
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
@@ -50,15 +50,12 @@ public class SimpleEmailServiceTest {
     public void testNullCc() {
         //Given
         Mail mail = new Mail("test@test.com", "test subject",
-                "test message", "");
+                "test message");
 
         SimpleMailMessage mailMessage = new SimpleMailMessage();
         mailMessage.setTo(mail.getMailTo());
         mailMessage.setSubject(mail.getSubject());
         mailMessage.setText(mail.getMessage());
-        if (mail.getToCc().length() != 0) {
-            mailMessage.setCc(mail.getToCc());
-        }
 
         //When
         simpleEmailService.send(mail);
