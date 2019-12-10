@@ -21,7 +21,7 @@ public class EmailScheduler {
     @Autowired
     private AdminConfig adminConfig;
 
-    @Scheduled(fixedDelay = 20000)
+
     public void sendInformationEmail() {
         long size = taskRepository.count();
         String task = "task.";
@@ -33,7 +33,5 @@ public class EmailScheduler {
                 SUBJECT,
                 "Currently in database you got: " + size + " " + task
         ));
-
-
     }
 }
