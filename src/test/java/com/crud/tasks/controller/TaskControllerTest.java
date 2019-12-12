@@ -104,7 +104,7 @@ public class TaskControllerTest {
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
 
-        when(service.saveTask(any(Task.class))).thenReturn(task);
+        when(service.saveTask(any())).thenReturn(task);
 
         //When % Then
         mockMvc.perform(post("/v1/task/createTask")
@@ -112,6 +112,8 @@ public class TaskControllerTest {
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
                 .andExpect(status().isOk());
+
+        verify(service, times(1)).saveTask(any());
     }
 
     @Test
@@ -122,14 +124,15 @@ public class TaskControllerTest {
         Gson gson = new Gson();
         String jsonContent = gson.toJson(taskDto);
 
-        when(taskMapper.mapToTaskDto(any(Task.class))).thenReturn(taskDto);
+        when(taskMapper.mapToTaskDto(any())).thenReturn(taskDto);
 
         //When & Then
         mockMvc.perform(put("/v1/task/updateTask")
                 .contentType(MediaType.APPLICATION_JSON)
                 .characterEncoding("UTF-8")
                 .content(jsonContent))
-                .andExpect(status().isOk());
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.id", is(1)));
     }
 
 }
