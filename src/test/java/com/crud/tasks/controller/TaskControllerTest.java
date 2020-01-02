@@ -134,5 +134,4 @@ public class TaskControllerTest {
                 .andExpect(status().isOk())
                 .andExpect(jsonPath("$.id", is(1)));
     }
-
 }
