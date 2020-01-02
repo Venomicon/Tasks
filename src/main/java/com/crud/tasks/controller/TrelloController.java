@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("crud/v1/trello")
+@RequestMapping("/v1/trello")
 @CrossOrigin("*")
 public class TrelloController {
     private static final String KODILLA = "Kodilla";
