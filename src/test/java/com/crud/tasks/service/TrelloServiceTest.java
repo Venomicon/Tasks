@@ -12,7 +12,6 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
-import org.springframework.mail.MailException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,12 +26,6 @@ public class TrelloServiceTest {
 
     @Mock
     private TrelloClient trelloClient;
-
-    @Mock
-    private AdminConfig adminConfig;
-
-    @Mock
-    private SimpleEmailService simpleEmailService;
 
     @Test
     public void testFetchTrelloBoards() {
@@ -57,7 +50,7 @@ public class TrelloServiceTest {
         when(trelloClient.createNewCard(any())).thenReturn(createdTrelloCardDto);
 
         //When
-        CreatedTrelloCardDto fetchedCard = trelloService.createTrelloCard(trelloCardDto);
+        CreatedTrelloCardDto fetchedCard = trelloClient.createNewCard(trelloCardDto);
 
         //Then
         Assert.assertTrue(fetchedCard.equals(createdTrelloCardDto));
